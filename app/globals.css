@@ -1,3 +1,185 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.header {
+  padding-top: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+}
+
+.header h1 {
+  font-size: 40px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  padding: 16px 0;
+}
+
+.pagination button {
+  color: #fff;
+}
+
+.Mui-selected {
+  background: #ffffff75 !important;
+}
+
+.search-box {
+  color: #fff !important;
+}
+
+/* Ensure the global CSS file is imported in your _app.js */
+.custom-textfield {
+  /* Adjusts the overall size and padding */
+  width: 100%; /* Full width */
+  margin-bottom: 20px; /* Space below the TextField */
+}
+
+.custom-textfield .MuiOutlinedInput-root {
+  background-color: none;
+  color: #fff;
+  border-radius: 8px;
+
+  &.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #3f51b5; /* Blue border when focused */
+  }
+
+  &:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #777; /* Grey border on hover */
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-color: #555; /* Default border color */
+  }
+}
+
+.custom-textfield .MuiInputLabel-root {
+  /* Label styles */
+  color: #bbb; /* Grey label text color */
+
+  &.Mui-focused {
+    color: #ffffff; /* Blue color when focused */
+  }
+}
+
+.custom-textfield .MuiInputBase-input {
+  color: #fff;
+}
+
+.custom-textfield .MuiFormHelperText-root {
+  color: #bbb;
+}
+
+/* *********** BUTTON***************** */
+
+.custom-button {
+  background-color: #ffffff; /* Primary background color */
+  color: #000000; /* Text color */
+  border-radius: 50px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for a larger button */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: #c5c5c5; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift the button slightly on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+  }
+
+  &:active {
+    background-color: #929292; /* Darker color when active */
+    transform: translateY(0px); /* Return to original position */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow */
+  }
+
+  &:disabled {
+    background-color: #9e9e9e; /* Gray out the button when disabled */
+    color: #e0e0e0; /* Light text color when disabled */
+    cursor: not-allowed; /* Change cursor when disabled */
+    box-shadow: none; /* Remove shadow when disabled */
+  }
+}
+
+.MuiContainer-root {
+  padding: 10px 40px !important;
+}
+
+/* Ensure the global CSS file is imported in your _app.js */
+/* Ensure the global CSS file is imported in your _app.js */
+.card {
+  border-radius: 8px; /* Rounded corners */
+  color: white;
+  border: 1px solid white;
+  background-color: transparent; /* Yellow background */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.card:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  transform: translateY(-2px); /* Lift card slightly on hover */
+}
+
+.card-content {
+  padding: 16px; /* Padding inside the card */
+}
+
+.card-actions {
+  padding: 8px 16px; /* Padding for actions */
+  display: flex;
+  justify-content: space-between; /* Space between timestamp and icons */
+  align-items: center; /* Vertically align items */
+}
+
+.card-timestamp-container {
+  flex-grow: 1; /* Allow timestamp to take up remaining space */
+  text-align: left; /* Align text to the left */
+}
+
+.card-title {
+  font-size: 1.5rem; /* Larger font size for the title */
+  font-weight: bold; /* Bold title text */
+}
+
+.card-description {
+  font-size: 0.875rem; /* Font size for description */
+  color: #333; /* Darker text color for readability */
+}
+
+.card-timestamp {
+  font-size: 0.75rem; /* Smaller font size for timestamp */
+  color: #666; /* Grey color for timestamp */
+}
+
+.card-icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-icon {
+  color: #a8a8a8;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .MuiContainer-root {
+    padding: 10px 25px !important;
+  }
+}
