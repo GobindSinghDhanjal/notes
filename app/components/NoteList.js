@@ -152,7 +152,7 @@ const NoteList = () => {
           <DialogContent>
             <Typography variant="body1">{viewNote.content}</Typography>
             <Typography variant="caption" color="textSecondary">
-              Last modified: {new Date(viewNote.timestamp).toLocaleString()}
+              Last modified: {formatDate(viewNote.timestamp)}
             </Typography>
           </DialogContent>
         </Dialog>
