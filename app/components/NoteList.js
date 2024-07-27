@@ -74,7 +74,7 @@ const NoteList = () => {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
     >
       <Container sx={{ flex: 1, marginBottom: 10 }}>
         <Button
