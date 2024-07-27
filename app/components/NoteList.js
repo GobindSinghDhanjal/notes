@@ -116,7 +116,10 @@ const NoteList = () => {
                   </div>
                   <div className="card-icons">
                     <IconButton
-                      onClick={() => handleViewNote(note)}
+                       onClick={(e) => {
+                        e.stopPropagation();
+                        handleEdit(note);
+                      }}
                       className="edit-icon"
                     >
                       <EditIcon />
