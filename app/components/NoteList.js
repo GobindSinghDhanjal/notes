@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Card, CardContent, CardActions, Grid } from "@mui/material";
+import { Card, CardContent, CardActions, Grid, useTheme, useMediaQuery } from "@mui/material";
 import { useNotes } from "@/context/NotesContext";
+import { AnimatePresence, motion } from "framer-motion";
 import NoteModal from "./NoteModal";
 import {
   Container,
@@ -72,6 +73,32 @@ const NoteList = () => {
     }).format(date);
   };
 
+  const dialogVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.9,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <div
       style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
@@ -100,41 +127,44 @@ const NoteList = () => {
                 className="card"
                 variant="outlined"
               >
-                <CardContent className="card-content">
-                  <Typography className="card-title" variant="h6">
-                    {note.title}
-                  </Typography>
-                  <Typography variant="body2">
-                    {note.content.substring(0, 100)}...
-                  </Typography>
-                </CardContent>
-                <CardActions className="card-actions">
-                  <div className="card-timestamp-container">
-                    <Typography variant="caption" className="card-timestamp">
-                      {formatDate(note.timestamp)}
+                {" "}
+                <motion.div layoutId={note.id}>
+                  <CardContent className="card-content">
+                    <Typography className="card-title" variant="h6">
+                      {note.title}
                     </Typography>
-                  </div>
-                  <div className="card-icons">
-                    <IconButton
-                       onClick={(e) => {
-                        e.stopPropagation();
-                        handleEdit(note);
-                      }}
-                      className="edit-icon"
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(note.id);
-                      }}
-                      color="error"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </div>
-                </CardActions>
+                    <Typography variant="body2">
+                      {note.content.substring(0, 100)}...
+                    </Typography>
+                  </CardContent>
+                  <CardActions className="card-actions">
+                    <div className="card-timestamp-container">
+                      <Typography variant="caption" className="card-timestamp">
+                        {formatDate(note.timestamp)}
+                      </Typography>
+                    </div>
+                    <div className="card-icons">
+                      <IconButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEdit(note);
+                        }}
+                        className="edit-icon"
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(note.id);
+                        }}
+                        color="error"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </div>
+                  </CardActions>
+                </motion.div>
               </Card>
             </Grid>
           ))}
@@ -150,15 +180,58 @@ const NoteList = () => {
         <NoteModal note={modalNote} onClose={() => setModalNote(null)} />
       )}
       {viewNote && (
-        <Dialog open={!!viewNote} onClose={() => setViewNote(null)}>
-          <DialogTitle>{viewNote.title}</DialogTitle>
-          <DialogContent>
-            <Typography variant="body1">{viewNote.content}</Typography>
-            <Typography variant="caption" color="textSecondary">
-              Last modified: {formatDate(viewNote.timestamp)}
-            </Typography>
-          </DialogContent>
-        </Dialog>
+        <AnimatePresence>
+          <Dialog
+            open={!!viewNote}
+      onClose={() => setViewNote(null)}
+      fullScreen={fullScreen}
+      maxWidth="sm"
+      fullWidth
+      PaperProps={{
+        component: motion.div,
+        variants: dialogVariants,
+        initial: "hidden",
+        animate: "visible",
+        exit: "exit",
+        style: {
+          backgroundColor: "rgba(255, 255, 255, 0.15)",
+          backdropFilter: "blur(10px)",
+          color: "#ffffff",
+          borderRadius: 16,
+          maxHeight:"50%",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
+          border: "1px solid rgba(255, 255, 255, 0.18)",
+          margin:"5%",
+        },
+      }}
+          >
+            <motion.div
+              variants={dialogVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <DialogTitle
+                style={{
+                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Light text shadow
+                }}
+              >
+                {viewNote.title}
+              </DialogTitle>
+              <DialogContent
+                style={{
+                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)", // Light text shadow
+                }}
+              >
+                <Typography variant="body1">{viewNote.content}</Typography>
+                <br />
+                <Typography variant="caption" color="#d1d1d1">
+                  Last modified: {formatDate(viewNote.timestamp)}
+                </Typography>
+              </DialogContent>
+            </motion.div>
+          </Dialog>
+        </AnimatePresence>
       )}
     </div>
   );

@@ -176,6 +176,25 @@ body {
   color: #a8a8a8;
 }
 
+.MuiPaper-root::-webkit-scrollbar {
+  width: 4px;
+}
+
+.MuiPaper-root::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.055);
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.MuiPaper-root::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.192);
+  border-radius: 10px;
+}
+
+.MuiPaper-root::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 @media (max-width: 768px) {
   .header {
     padding-left: 25px;
